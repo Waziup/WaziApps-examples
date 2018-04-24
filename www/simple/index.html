@@ -1,7 +1,7 @@
 <body>
   <script src="https://cdn.jsdelivr.net/npm/waziup-js@0.0.17/lib/Waziup.js"></script>
   <script>
-    Waziup.ApiClient.instance.basePath = 'http://localhost/api/v1'
+    Waziup.ApiClient.instance.basePath = 'http://api.waziup.io/api/v1'
     var api = new Waziup.SensorsApi()
     api.getMeasurement("waziup", "MySensor", "TC").then((meas) =>{
       document.getElementById("sensor_value").innerHTML = "Your  sensor value is: " + meas.last_value;
