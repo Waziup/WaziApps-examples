@@ -1,0 +1,23 @@
+<body>
+  <!--script src="https://cdn.jsdelivr.net/npm/waziup-js@0.0.18/lib/Waziup.js"></script-->
+  <script src="./Waziup.js"></script>
+  <script>
+    Waziup.ApiClient.instance.basePath = 'http://api.waziup.io/api/v1'
+    var api = new Waziup.SensorsApi()
+    var names = []
+    api.getSensors("waziup").then((sensors) =>{
+      for(sensor of sensors) {
+        if(sensor.name) {
+          names.push(sensor.name)
+        }
+      }
+      document.getElementById("sensor_value").innerHTML = "Your  sensor value is: " + names;
+    })
+  </script>
+  Sensor list:
+  <div id="sensor_value">
+    Loading...
+  </div>
+</body>
+</html>
+
