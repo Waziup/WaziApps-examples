@@ -1,14 +1,11 @@
+<html>
 <body>
   <!--script src="https://cdn.jsdelivr.net/npm/waziup-js@0.0.18/lib/Waziup.js"></script-->
   <script src="./Waziup.js"></script>
   <script>
-    console.log("1")
     Waziup.ApiClient.instance.basePath = 'http://api.waziup.io/api/v1'
-    console.log("2")
     var api = new Waziup.SensorsApi()
-    console.log("3")
     api.getMeasurement("waziup", "MySensor", "TC").then((meas) =>{
-      console.log("4")
       document.getElementById("sensor_value").innerHTML = "Your  sensor value is: " + meas.last_value;
     })
   </script>
