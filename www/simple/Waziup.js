@@ -114,7 +114,7 @@ var _exports = function _exports() {
      * @type {Array.<String>}
      * @default {}
      */
-    this.defaultHeaders = { 'Access-Control-Allow-Origin': '*' };
+    this.defaultHeaders = {};
 
     /**
      * The default HTTP timeout for all API calls.
