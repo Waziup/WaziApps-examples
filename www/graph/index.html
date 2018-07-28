@@ -1,3 +1,4 @@
+<html>
 <body>
   <!--script src="https://cdn.jsdelivr.net/npm/waziup-js@0.0.18/lib/Waziup.js"></script-->
   <script src="./Waziup.js"></script>
@@ -8,7 +9,7 @@
     var api = new Waziup.SensorsApi()
     var data = []
     var labels = []
-    api.getMeasurementValues("waziup", "MySensor15", "TC", {'lastN': "20"}).then((values) =>{
+    api.getMeasurementValues("waziup-UPPA-TESTS2", "UPPA_Sensor6", "TC", {'lastN': "20"}).then((values) =>{
       console.log("data" + JSON.stringify(values))
       for(value of values) {
         data.push(value.value)
