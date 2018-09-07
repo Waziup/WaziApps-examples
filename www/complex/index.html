@@ -7,8 +7,8 @@
     var names = []
     api.getSensors("waziup").then((sensors) =>{
       for(sensor of sensors) {
-        for(measurement of sensors.measurements) {
-          names.push(sensor.id + " -> " + measurement.id + "= " + measurement.last_value.value + "\n")
+        for(measurement of sensor.measurements) {
+          names.push(sensor.id + " -> " + measurement.id + "= " + measurement.last_value + "\n")
         }
       }
       document.getElementById("sensor_value").innerHTML = names;
