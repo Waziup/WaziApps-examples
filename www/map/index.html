@@ -20,7 +20,7 @@
     var api = new Waziup.SensorsApi()
     var markers = []
     api.getSensors("waziup").then((sensors) =>{
-      for(sensor in sensors) {
+      for(sensor of sensors) {
         console.log("data" + JSON.stringify(sensor))
         L.marker([sensor.location.latitude, sensor.location.longitude]).addTo(mymap);
       }
