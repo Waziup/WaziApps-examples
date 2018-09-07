@@ -19,14 +19,14 @@
     Waziup.ApiClient.instance.basePath = 'https://api.waziup.io:4430/api/v1'
     var api = new Waziup.SensorsApi()
     var markers = []
-    api.getSensors("waziup").then((sensors) =>{
+    api.getSensors("waziup", {limit:1000}).then((sensors) =>{
       console.log("data" + JSON.stringify(sensors))
       for(sensor of sensors) {        
         L.marker([sensor.location.latitude, sensor.location.longitude]).addTo(mymap);
       }
     })
   </script>
-  test2
+  test3
 </body>
 </html>
 
