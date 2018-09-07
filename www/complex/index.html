@@ -6,6 +6,7 @@
     var api = new Waziup.SensorsApi()
     var names = []
     api.getSensors("waziup").then((sensors) =>{
+      console.log(JSON.stringify(sensors));
       for(sensor of sensors) {
         names.push(sensor.id + ": ")
         for(measurement of sensor.measurements) {
