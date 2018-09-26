@@ -3,7 +3,7 @@
   <script src="https://cdn.jsdelivr.net/npm/waziup-js@0.0.18/lib/Waziup.js"></script>
   <!--script src="./Waziup.js"></script-->
   <script>
-    Waziup.ApiClient.instance.basePath = 'https://api.waziup.io:4430/api/v1'
+    Waziup.ApiClient.instance.basePath = 'https://api.waziup.io/api/v1'
     var api = new Waziup.SensorsApi()
     api.getMeasurement("waziup", "UPPA_Sensor6", "TC").then((meas) =>{
       document.getElementById("sensor_value").innerHTML = "The temperature is: " + meas.last_value + "C";
