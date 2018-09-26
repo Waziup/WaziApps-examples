@@ -2,7 +2,7 @@
 <body>
   <script src="https://cdn.jsdelivr.net/npm/waziup-js@0.0.18/lib/Waziup.js"></script>
   <script>
-    Waziup.ApiClient.instance.basePath = 'https://api.waziup.io:4430/api/v1'
+    Waziup.ApiClient.instance.basePath = 'https://api.waziup.io/api/v1'
     var api = new Waziup.SensorsApi()
     var names = []
     api.getSensors("waziup").then((sensors) =>{
