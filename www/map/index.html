@@ -16,7 +16,7 @@
          accessToken: 'pk.eyJ1IjoiY2R1cG9udDIiLCJhIjoiY2pnZTVkZ2xsMGxyZTJ4cjA5dDZ4cjNneSJ9.NJT7CULfcY0mjeavffR_vg'
       }).addTo(mymap);
     
-    Waziup.ApiClient.instance.basePath = 'https://api.waziup.io:4430/api/v1'
+    Waziup.ApiClient.instance.basePath = 'https://api.waziup.io/api/v1'
     var api = new Waziup.SensorsApi()
     var markers = []
     api.getSensors("waziup", {limit:1000}).then((sensors) =>{
