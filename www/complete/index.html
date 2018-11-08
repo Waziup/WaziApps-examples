@@ -110,6 +110,9 @@
     var domain = "waziup";
     var sensor_id = "Sensor2-ea0541de1ab7132a1d45b85f9b2139f5";
     var measurement_id = "TC1";
+    var measurementValues = [];
+    var graphLabel = [];
+    var myChart;
 
     // initializing
     loadSensors();
@@ -134,10 +137,13 @@
     function loadMeasurements() {
       // list of measurements
       var selectMeasurement = document.getElementById("selectMeasurement");
+      // reset measurement values
+      measurementValues = [];
       api.getSensorMeasurements("waziup", sensor_id).then((measurements) => {
-        measurements.forEach((measurement,index) => {
+
+        measurements.forEach((measurement, index) => {
           // set measurement_id to the first measurement
-          if(index==0){
+          if (index == 0) {
             measurement_id = measurement.id
           }
           // create and populate an option for the select
@@ -147,6 +153,34 @@
 
           // then append it to the select element
           selectMeasurement.appendChild(opt);
+
+          // get measurement values for each measurement
+          api.getMeasurementValues(domain, sensor_id, measurement.id, {
+            'lastN': "20"
+          }).then((values) => {
+            var data = [];
+
+            // reset graph label
+            if (values.length > 0)
+              graphLabel = [];
+
+            // add each measurement values in an array
+            for (value of values) {
+              data.push(value.value)
+              if (value.timestamp)
+                graphLabel.push(value.timestamp)
+            }
+
+            // 
+            if (data.length > 0)
+              measurementValues.push({
+                label: measurement.id + (measurement.unit ? ("(" + measurement.unit + ")") : ""),
+                data: data,
+                borderColor: dynamicColors()
+              })
+          }).finally((values) => {
+            loadGraph();
+          })
         });
         loadValues();
       })
@@ -170,6 +204,14 @@
       loadValues();
     }
 
+    // random color generator
+    var dynamicColors = function () {
+      var r = Math.floor(Math.random() * 255);
+      var g = Math.floor(Math.random() * 255);
+      var b = Math.floor(Math.random() * 255);
+      return "rgb(" + r + "," + g + "," + b + ")";
+    };
+
     // load sensor and measurement values
     function loadValues() {
 
@@ -190,33 +232,30 @@
         document.getElementById("sensor_sensing_device").innerHTML = "Sensing Device : " + sensor.sensing_device;
         document.getElementById("sensor_unit").innerHTML = "Unit : " + sensor.unit;
       });
+    }
 
-      // graph with sensor values
-      var data = []
-      var labels = []
-      api.getMeasurementValues(domain, sensor_id, measurement_id, {
-        'lastN': "20"
-      }).then((values) => {
-        for (value of values) {
-          data.push(value.value)
-          labels.push(value.timestamp)
-        }
+    // load graph with sensor values
+    function loadGraph() {
+      // if chart already exists update dataset
+      if (myChart) {
+        myChart.data.labels = graphLabel;
+        myChart.data.datasets = measurementValues;
+        myChart.update();
+      } else {
         var ctx = document.getElementById("myChart").getContext('2d');
-        var myChart = new Chart(ctx, {
+        myChart = new Chart(ctx, {
           type: 'line',
           data: {
-            labels: labels,
-            datasets: [{
-              label: 'Sensor values',
-              data: data
-            }]
+            labels: graphLabel,
+            datasets: measurementValues
           },
           options: {
-            responsive: false
+            responsive: false,
           }
         });
-      })
+      }
     }
+
     // map
     var mymap = L.map('mapid').setView([-1.97, 30.1], 8);
     L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
