@@ -76,7 +76,7 @@
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" ></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" ></script>
-    <script src="https://cdn.jsdelivr.net/npm/waziup-js@0.0.18/lib/Waziup.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/waziup-js@1.1.6/lib/Waziup.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
     <script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js"></script>
     <script>
@@ -107,7 +107,6 @@
     Waziup.ApiClient.instance.basePath = 'https://api.waziup.io/api/v1'
     var api = new Waziup.SensorsApi()
     // default sensor values
-    var domain = "waziup";
     var sensor_id = "Sensor2-ea0541de1ab7132a1d45b85f9b2139f5";
     var measurement_id = "TC1";
     var measurementValues = [];
@@ -139,7 +138,7 @@
       var selectMeasurement = document.getElementById("selectMeasurement");
       // reset measurement values
       measurementValues = [];
-      api.getSensorMeasurements("waziup", sensor_id).then((measurements) => {
+      api.getSensorMeasurements(sensor_id).then((measurements) => {
 
         measurements.forEach((measurement, index) => {
           // set measurement_id to the first measurement
@@ -155,7 +154,7 @@
           selectMeasurement.appendChild(opt);
 
           // get measurement values for each measurement
-          api.getMeasurementValues(domain, sensor_id, measurement.id, {
+          api.getMeasurementValues(sensor_id, measurement.id, {
             'lastN': "20"
           }).then((values) => {
             var data = [];
@@ -216,7 +215,7 @@
     function loadValues() {
 
       // sensor context
-      api.getSensor(domain, sensor_id).then((sensor) => {
+      api.getSensor(sensor_id).then((sensor) => {
         document.getElementById("sensor_name_context").innerHTML = "Name : " + sensor.name;
         document.getElementById("sensor_owner").innerHTML = "Owner : " + sensor.owner;
         document.getElementById("sensor_domain").innerHTML = "Domain : " + sensor.domain;
@@ -224,10 +223,10 @@
       })
 
       // sensor value
-      api.getMeasurement(domain, sensor_id, measurement_id).then((sensor) => {
+      api.getMeasurement(sensor_id, measurement_id).then((sensor) => {
         document.getElementById("sensor_value_id").innerHTML = sensor.id;
         document.getElementById("sensor_name_value").innerHTML = "Name : " + sensor.name;
-        document.getElementById("sensor_last_value").innerHTML = "Last Value : " + sensor.last_value;
+        document.getElementById("sensor_last_value").innerHTML = "Last Value : " + sensor.last_value.value;
         document.getElementById("sensor_quantity_kind").innerHTML = "Quantity Kind : " + sensor.quantity_kind;
         document.getElementById("sensor_sensing_device").innerHTML = "Sensing Device : " + sensor.sensing_device;
         document.getElementById("sensor_unit").innerHTML = "Unit : " + sensor.unit;
@@ -266,7 +265,7 @@
     }).addTo(mymap);
 
     var markers = []
-    api.getSensors(domain, {
+    api.getSensors({
       limit: 1000
     }).then((sensors) => {
       for (sensor of sensors) {
