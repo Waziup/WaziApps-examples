@@ -8,7 +8,7 @@
     var api = new Waziup.SensorsApi()
     var data = []
     var labels = []
-    api.getMeasurementValues("waziup-UPPA-TESTS2", "UPPA_Sensor6", "TC", {'lastN': "20"}).then((values) =>{
+    api.getMeasurementValues("waziup-UPPA-TESTS2", "IST-AFRICA-2018_Sensor6", "TC", {'lastN': "20"}).then((values) =>{
       console.log("data" + JSON.stringify(values))
       for(value of values) {
         data.push(value.value)
