@@ -1,11 +1,10 @@
 <html>
 <body>
-  <script src="https://cdn.jsdelivr.net/npm/waziup-js@0.0.18/lib/Waziup.js"></script>
-  <!--script src="./Waziup.js"></script-->
+  <script src="https://cdn.jsdelivr.net/npm/waziup-js@1.1.6/lib/Waziup.js"></script>
   <script>
     Waziup.ApiClient.instance.basePath = 'https://api.waziup.io/api/v1'
     var api = new Waziup.SensorsApi()
-    api.getMeasurement("waziup", "ISPACE_Sensor78", "TC").then((meas) =>{
+    api.getMeasurement("UPPA-TESTS_Sensor6", "TC").then((meas) =>{
       document.getElementById("sensor_value").innerHTML = "The temperature is: " + meas.last_value + "C";
     })
   </script>
