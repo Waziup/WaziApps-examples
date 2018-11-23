@@ -107,6 +107,7 @@
     Waziup.ApiClient.instance.basePath = 'https://api.waziup.io/api/v1'
     var api = new Waziup.SensorsApi()
     // default sensor values
+    var domain = "waziup";
     var sensor_id = "Sensor2-ea0541de1ab7132a1d45b85f9b2139f5";
     var measurement_id = "TC1";
     var measurementValues = [];
@@ -120,7 +121,7 @@
     function loadSensors() {
       // list of sensors
       var selectSensor = document.getElementById("selectSensor")
-      api.getSensors("waziup").then((sensors) => {
+      api.getSensors({domain: domain}).then((sensors) => {
         for (sensor of sensors) {
           // create and populate an option for the select
           var opt = document.createElement("option");
