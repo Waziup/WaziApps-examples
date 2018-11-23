@@ -121,7 +121,7 @@
     function loadSensors() {
       // list of sensors
       var selectSensor = document.getElementById("selectSensor")
-      api.getSensors({domain: domain}).then((sensors) => {
+      api.getSensors({q: "domain==" + domain, limit:1000}).then((sensors) => {
         for (sensor of sensors) {
           // create and populate an option for the select
           var opt = document.createElement("option");
