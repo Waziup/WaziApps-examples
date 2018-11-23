@@ -1,16 +1,16 @@
 <html>
 <body>
-  <script src="https://cdn.jsdelivr.net/npm/waziup-js@0.0.18/lib/Waziup.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/waziup-js@1.1.6/lib/Waziup.js"></script>
   <script>
     Waziup.ApiClient.instance.basePath = 'https://api.waziup.io/api/v1'
     var api = new Waziup.SensorsApi()
     var names = []
-    api.getSensors("waziup").then((sensors) =>{
+    api.getSensors().then((sensors) =>{
       console.log(JSON.stringify(sensors));
       for(sensor of sensors) {
         names.push(sensor.id + ": ")
         for(measurement of sensor.measurements) {
-          names.push(measurement.id + "=" + measurement.last_value + "  ")
+          names.push(measurement.id + "=" + (measurement.last_value? measurement.last_value.value + "  ": "no value"))
         }
         names.push("<br/>")
       }

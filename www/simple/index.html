@@ -5,7 +5,7 @@
     Waziup.ApiClient.instance.basePath = 'https://api.waziup.io/api/v1'
     var api = new Waziup.SensorsApi()
     api.getMeasurement("UPPA-TESTS_Sensor6", "TC").then((meas) =>{
-      document.getElementById("sensor_value").innerHTML = "The temperature is: " + meas.last_value + "C";
+      document.getElementById("sensor_value").innerHTML = "The temperature is: " + meas.last_value.value + "C";
     })
   </script>
   <h1> My Application</h1>

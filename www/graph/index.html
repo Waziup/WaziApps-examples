@@ -1,6 +1,6 @@
 <html>
 <body>
-  <script src="https://cdn.jsdelivr.net/npm/waziup-js@0.0.18/lib/Waziup.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/waziup-js@1.1.6/lib/Waziup.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
   <canvas id="myChart" width="800" height="600">Loading...</canvas>
   <script>
@@ -8,7 +8,7 @@
     var api = new Waziup.SensorsApi()
     var data = []
     var labels = []
-    api.getMeasurementValues("waziup-UPPA-TESTS2", "IST-AFRICA-2018_Sensor6", "TC", {'lastN': "20"}).then((values) =>{
+    api.getMeasurementValues("UPPA-TESTS_Sensor6", "TC", {'lastN': "20"}).then((values) =>{
       console.log("data" + JSON.stringify(values))
       for(value of values) {
         data.push(value.value)
