@@ -2,7 +2,7 @@ WaziApp examples
 ================
 
 This folder contains several examples of Waziup applications.   
-The examples are running in Github pages: https://waziup.github.io/WaziApps-examples/   
+The examples are running in Github pages: https://waziup.github.io/WaziApps-examples/index.html
 Full tutorial: http://www.waziup.io/tutorials/software/browserapp/   
 
 Usage

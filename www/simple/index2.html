@@ -1,0 +1,21 @@
+<html>
+<body>
+  <script src="Waziup.js"></script>
+  <script>
+ 
+    const Http = new XMLHttpRequest();
+    Http.open("GET", "https://api.staging.waziup.io/api/v2/devices");
+    Http.send();
+    Http.onreadystatechange=(e)=>{
+      console.log(Http.responseText)
+    }
+    
+  </script>
+  <h1> My Application</h1>
+
+  <div id="sensor_value">
+    Loading...
+  </div>
+</body>
+</html>
+
