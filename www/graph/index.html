@@ -1,35 +1,41 @@
 <html>
-<body>
-  <script src="https://cdn.jsdelivr.net/npm/waziup-js@0.0.18/lib/Waziup.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
-  <canvas id="myChart" width="800" height="600">Loading...</canvas>
-  <script>
-    Waziup.ApiClient.instance.basePath = 'https://api.waziup.io/api/v1'
-    var api = new Waziup.SensorsApi()
-    var data = []
-    var labels = []
-    api.getMeasurementValues("waziup-UPPA-TESTS2", "UPPA_Sensor6", "TC", {'lastN': "20"}).then((values) =>{
-      console.log("data" + JSON.stringify(values))
-      for(value of values) {
-        data.push(value.value)
-        labels.push(value.timestamp)
-      }
-      var ctx = document.getElementById("myChart").getContext('2d');
-      var myChart = new Chart(ctx, {
-          type: 'line',
-          data: {
-              labels: labels,
-              datasets: [{
-                  label: 'Sensor values',
-                  data: data
-              }]
-          },
-          options: {
-              responsive: false
+  <body>
+    <script src="https://cdn.jsdelivr.net/npm/waziup-js@2.0.0-alpha.10/lib/Waziup.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
+    <canvas id="myChart" width="800" height="600">Loading...</canvas>
+    <script>
+      Waziup.ApiClient.instance.basePath = "https://api.waziup.io/api/v2";
+      var api = new Waziup.SensorsApi();
+      var data = [];
+      var labels = [];
+      api
+        .getSensorsData({
+          device_id: "UGB-PILOTS_Sensor200",
+          sensor_id: "TP"
+        })
+        .then(values => {
+          console.log("data" + JSON.stringify(values));
+          for (value of values) {
+            data.push(value.value);
+            labels.push(value.timestamp);
           }
-      });
-    })
-  </script>
-</body>
+          var ctx = document.getElementById("myChart").getContext("2d");
+          var myChart = new Chart(ctx, {
+            type: "line",
+            data: {
+              labels: labels,
+              datasets: [
+                {
+                  label: "Device values",
+                  data: data
+                }
+              ]
+            },
+            options: {
+              responsive: false
+            }
+          });
+        });
+    </script>
+  </body>
 </html>
-

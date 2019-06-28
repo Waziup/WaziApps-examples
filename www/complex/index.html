@@ -1,26 +1,27 @@
 <html>
-<body>
-  <script src="https://cdn.jsdelivr.net/npm/waziup-js@0.0.18/lib/Waziup.js"></script>
-  <script>
-    Waziup.ApiClient.instance.basePath = 'https://api.waziup.io/api/v1'
-    var api = new Waziup.SensorsApi()
-    var names = []
-    api.getSensors("waziup").then((sensors) =>{
-      console.log(JSON.stringify(sensors));
-      for(sensor of sensors) {
-        names.push(sensor.id + ": ")
-        for(measurement of sensor.measurements) {
-          names.push(measurement.id + "=" + measurement.last_value + "  ")
+  <body>
+    <script src="https://cdn.jsdelivr.net/npm/waziup-js@2.0.0-alpha.10/lib/Waziup.js"></script>
+    <script>
+      Waziup.ApiClient.instance.basePath = "https://api.waziup.io/api/v2";
+      var api = new Waziup.DevicesApi();
+      var names = [];
+      api.getDevices().then(devices => {
+        console.log(JSON.stringify(devices));
+        for (device of devices) {
+          names.push(device.id + ": ");
+          for (sensor of device.sensors) {
+            names.push(
+              sensor.id + "=" + (sensor.value ? sensor.value.value : "") + "  "
+            );
+          }
+          names.push("<br/>");
         }
-        names.push("<br/>")
-      }
-      document.getElementById("sensor_value").innerHTML = names;
-    })
-  </script>
-  Sensor list:
-  <div id="sensor_value">
-    Loading...
-  </div>
-</body>
+        document.getElementById("device_value").innerHTML = names;
+      });
+    </script>
+    Device list:
+    <div id="device_value">
+      Loading...
+    </div>
+  </body>
 </html>
-

@@ -1,33 +1,42 @@
-
 <html>
-<head>
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css"/>
-  <script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js"></script>
-</head>
-<body>
-  <div id="mapid" style="height:600px"></div>
-  <script src="https://cdn.jsdelivr.net/npm/waziup-js@0.0.18/lib/Waziup.js"></script>
-  <script>
-      var mymap = L.map('mapid').setView([-1.97, 30.1], 8);
-      L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
-         attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
-         maxZoom: 8,
-         id: 'mapbox.streets',
-         accessToken: 'pk.eyJ1IjoiY2R1cG9udDIiLCJhIjoiY2pnZTVkZ2xsMGxyZTJ4cjA5dDZ4cjNneSJ9.NJT7CULfcY0mjeavffR_vg'
-      }).addTo(mymap);
-    
-    Waziup.ApiClient.instance.basePath = 'https://api.waziup.io/api/v1'
-    var api = new Waziup.SensorsApi()
-    var markers = []
-    api.getSensors("waziup", {limit:1000}).then((sensors) =>{
-      console.log("data" + JSON.stringify(sensors))
-      for(sensor of sensors) {
-        if(sensor.location) {
-          L.marker([sensor.location.latitude, sensor.location.longitude]).addTo(mymap);
+  <head>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css"
+    />
+    <script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js"></script>
+  </head>
+  <body>
+    <div id="mapid" style="height:600px"></div>
+    <script src="https://cdn.jsdelivr.net/npm/waziup-js@2.0.0-alpha.10/lib/Waziup.js"></script>
+    <script>
+      var mymap = L.map("mapid").setView([-1.97, 30.1], 8);
+      L.tileLayer(
+        "https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}",
+        {
+          attribution:
+            'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
+          maxZoom: 8,
+          id: "mapbox.streets",
+          accessToken:
+            "pk.eyJ1IjoiY2R1cG9udDIiLCJhIjoiY2pnZTVkZ2xsMGxyZTJ4cjA5dDZ4cjNneSJ9.NJT7CULfcY0mjeavffR_vg"
         }
-      }
-    })
-  </script>
-</body>
-</html>
+      ).addTo(mymap);
 
+      Waziup.ApiClient.instance.basePath = "https://api.waziup.io/api/v2";
+      var api = new Waziup.DevicesApi();
+      var markers = [];
+      api.getDevices("waziup", { limit: 1000 }).then(devices => {
+        console.log("data" + JSON.stringify(devices));
+        for (device of devices) {
+          if (device.location) {
+            L.marker([
+              device.location.latitude,
+              device.location.longitude
+            ]).addTo(mymap);
+          }
+        }
+      });
+    </script>
+  </body>
+</html>
