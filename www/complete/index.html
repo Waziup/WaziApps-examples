@@ -1,280 +1,325 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
+    />
 
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css"/>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css"
+    />
 
     <title>WaziUp</title>
   </head>
   <body>
-
     <!-- Sidebar -->
-    <ul class="sidebar"  id="mtabs">
-        <img src="waziupLogo.png" class="logo" alt="Waziup">
-        <h4 class="text-center">App Title</h4>
-        <li class="active"><a href="#context" rel="context">Sensor Context</a></li>
-        <li><a href="#value" rel="value">Sensor Value</a></li>
-        <li><a href="#map" rel="map">Map</a></li>
-        <li><a href="#graph" rel="graph">Graph</a></li>
+    <ul class="sidebar" id="mtabs">
+      <img src="waziupLogo.png" class="logo" alt="Waziup" />
+      <h4 class="text-center">App Title</h4>
+      <li class="active">
+        <a href="#context" rel="context">Device Context</a>
+      </li>
+      <li><a href="#value" rel="value">Device Value</a></li>
+      <li><a href="#map" rel="map">Map</a></li>
+      <li><a href="#graph" rel="graph">Graph</a></li>
     </ul>
     <!-- Page Content -->
     <div class="content">
-        <div id="mtabs_content_container">
-          <!-- Sensor Selecter -->
-          <div class="form-group row">
-              <div class="col-sm">
-                <label for="select">Sensors</label>
-                <select class="form-control" id="selectSensor" onchange="onSensorSelect()">
-                </select>
-              </div>
-              <div class="col-sm">
-                <label for="select">Measurements</label>
-                <select class="form-control" id="selectMeasurement" onchange="onMeasurementSelect()">
-                </select>
-              </div>
+      <div id="mtabs_content_container">
+        <!-- Device Selecter -->
+        <div class="form-group row">
+          <div class="col-sm">
+            <label for="select">Devices</label>
+            <select
+              class="form-control"
+              id="selectDevice"
+              onchange="onDeviceSelect()"
+            >
+            </select>
           </div>
-          <div id="context" class="mtab_content" style="display: block;">
-              <div>
-                <ul class="list-group">
-                    <li class="list-group-item active">Sensor Context</li>
-                    <li class="list-group-item" id="sensor_name_context">Name</li>
-                    <li class="list-group-item" id="sensor_owner">Owner</li>
-                    <li class="list-group-item" id="sensor_domain">Domain</li>
-                    <li class="list-group-item" id="sensor_gateway">Gateway</li>
-                </ul>
-              </div>
-          </div>
-          <div id="value" class="mtab_content">
-              <div>
-                <ul class="list-group">
-                    <li class="list-group-item active">Sensor Value for Measurement <span id="sensor_value_id"></span></li>
-                    <li class="list-group-item" id="sensor_name_value">Name</li>
-                    <li class="list-group-item" id="sensor_last_value">Last Value</li>
-                    <li class="list-group-item" id="sensor_quantity_kind">Quantity Kind</li>
-                    <li class="list-group-item" id="sensor_sensing_device">Sensing Device</li>
-                    <li class="list-group-item" id="sensor_unit">Unit</li>
-                </ul>
-              </div>
-          </div>
-          <div id="map" class="mtab_content">
-              <div id="mapid" style="height:600px"></div>
-          </div>
-          <div id="graph" class="mtab_content">
-              <canvas id="myChart" width="800" height="600">Loading...</canvas>
+          <div class="col-sm">
+            <label for="select">Sensors</label>
+            <select
+              class="form-control"
+              id="selectSensor"
+              onchange="onSensorSelect()"
+            >
+            </select>
           </div>
         </div>
+        <div id="context" class="mtab_content" style="display: block;">
+          <div>
+            <ul class="list-group">
+              <li class="list-group-item active">Device Context</li>
+              <li class="list-group-item" id="device_name_context">Name</li>
+              <li class="list-group-item" id="device_owner">Owner</li>
+              <li class="list-group-item" id="device_domain">Domain</li>
+              <li class="list-group-item" id="device_gateway">Gateway</li>
+            </ul>
+          </div>
+        </div>
+        <div id="value" class="mtab_content">
+          <div>
+            <ul class="list-group">
+              <li class="list-group-item active">
+                Device Value for Sensor <span id="device_value_id"></span>
+              </li>
+              <li class="list-group-item" id="device_name_value">Name</li>
+              <li class="list-group-item" id="device_last_value">Last Value</li>
+              <li class="list-group-item" id="device_quantity_kind">
+                Quantity Kind
+              </li>
+              <li class="list-group-item" id="device_sensing_device">
+                Sensing Device
+              </li>
+              <li class="list-group-item" id="device_unit">Unit</li>
+            </ul>
+          </div>
+        </div>
+        <div id="map" class="mtab_content">
+          <div id="mapid" style="height:600px"></div>
+        </div>
+        <div id="graph" class="mtab_content">
+          <canvas id="myChart" width="800" height="600">Loading...</canvas>
+        </div>
+      </div>
     </div>
 
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" ></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" ></script>
-    <script src="https://cdn.jsdelivr.net/npm/waziup-js@1.1.6/lib/Waziup.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/waziup-js@2.0.0-alpha.10/lib/Waziup.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
     <script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js"></script>
     <script>
-    $(document).ready(function () {
-      //  When user clicks on tab, this code will be executed
-      $("#mtabs li").click(function () {
-        //  First remove class "active" from currently active tab
-        $("#mtabs li").removeClass('active');
+      $(document).ready(function() {
+        //  When user clicks on tab, this code will be executed
+        $("#mtabs li").click(function() {
+          //  First remove class "active" from currently active tab
+          $("#mtabs li").removeClass("active");
 
-        //  Now add class "active" to the selected/clicked tab
-        $(this).addClass("active");
+          //  Now add class "active" to the selected/clicked tab
+          $(this).addClass("active");
 
-        //  Hide all tab content
-        $(".mtab_content").hide();
+          //  Hide all tab content
+          $(".mtab_content").hide();
 
-        //  Here we get the href value of the selected tab
-        var selected_tab = $(this).find("a").attr("href");
+          //  Here we get the href value of the selected tab
+          var selected_tab = $(this)
+            .find("a")
+            .attr("href");
 
-        //  Show the selected tab content
-        $(selected_tab).fadeIn();
+          //  Show the selected tab content
+          $(selected_tab).fadeIn();
 
-        //  At the end, we add return false so that the click on the link is not executed
-        return false;
+          //  At the end, we add return false so that the click on the link is not executed
+          return false;
+        });
       });
-    });
     </script>
     <script>
-    Waziup.ApiClient.instance.basePath = 'https://api.waziup.io/api/v1'
-    var api = new Waziup.SensorsApi()
-    // default sensor values
-    var domain = "waziup";
-    var sensor_id = "UPPA-TESTS_Sensor6";
-    var measurement_id = "TC";
-    var measurementValues = [];
-    var graphLabel = [];
-    var myChart;
+      Waziup.ApiClient.instance.basePath = "https://api.waziup.io/api/v2";
+      var devicesApi = new Waziup.DevicesApi();
+      var sensorsApi = new Waziup.SensorsApi();
+      // default device values
+      var device_id = "UGB-PILOTS_Sensor200";
+      var sensor_id = "TP";
+      var sensorValues = [];
+      var graphLabel = [];
+      var myChart;
 
-    // initializing
-    loadSensors();
-    loadMeasurements();
+      // initializing
+      loadDevices();
+      loadSensors();
 
-    function loadSensors() {
-      // list of sensors
-      var selectSensor = document.getElementById("selectSensor")
-      api.getSensors({q: "domain==" + domain, limit:1000}).then((sensors) => {
-        for (sensor of sensors) {
-          // create and populate an option for the select
-          var opt = document.createElement("option");
-          opt.value = sensor.id;
-          opt.innerHTML = sensor.id;
+      function loadDevices() {
+        // list of devices
+        var selectDevice = document.getElementById("selectDevice");
+        devicesApi.getDevices("waziup").then(devices => {
+          for (device of devices) {
+            // create and populate an option for the select
+            var opt = document.createElement("option");
+            opt.value = device.id;
+            opt.innerHTML = device.id;
 
-          // then append it to the select element
-          selectSensor.appendChild(opt);
-        }
-      })
-    }
-
-    function loadMeasurements() {
-      // list of measurements
-      var selectMeasurement = document.getElementById("selectMeasurement");
-      // reset measurement values
-      measurementValues = [];
-      api.getSensorMeasurements(sensor_id).then((measurements) => {
-
-        measurements.forEach((measurement, index) => {
-          // set measurement_id to the first measurement
-          if (index == 0) {
-            measurement_id = measurement.id
+            // then append it to the select element
+            selectDevice.appendChild(opt);
           }
-          // create and populate an option for the select
-          var opt = document.createElement("option");
-          opt.value = measurement.id;
-          opt.innerHTML = measurement.id;
+        });
+      }
 
-          // then append it to the select element
-          selectMeasurement.appendChild(opt);
-
-          // get measurement values for each measurement
-          api.getMeasurementValues(sensor_id, measurement.id, {
-            'lastN': "20"
-          }).then((values) => {
-            var data = [];
-
-            // reset graph label
-            if (values.length > 0)
-              graphLabel = [];
-
-            // add each measurement values in an array
-            for (value of values) {
-              data.push(value.value)
-              if (value.timestamp)
-                graphLabel.push(value.timestamp)
+      function loadSensors() {
+        // list of sensors
+        var selectSensor = document.getElementById("selectSensor");
+        // reset sensor values
+        sensorValues = [];
+        devicesApi.getDeviceSensors(device_id).then(sensors => {
+          sensors.forEach((sensor, index) => {
+            // set sensor_id to the first sensor
+            if (index == 0) {
+              sensor_id = sensor.id;
             }
+            // create and populate an option for the select
+            var opt = document.createElement("option");
+            opt.value = sensor.id;
+            opt.innerHTML = sensor.id;
 
-            // 
-            if (data.length > 0)
-              measurementValues.push({
-                label: measurement.id + (measurement.unit ? ("(" + measurement.unit + ")") : ""),
-                data: data,
-                borderColor: dynamicColors()
+            // then append it to the select element
+            selectSensor.appendChild(opt);
+
+            // get sensor values for each sensor
+            sensorsApi
+              .getSensorsData({ device_id, sensor_id: sensor.id })
+              .then(values => {
+                var data = [];
+
+                // reset graph label
+                if (values.length > 0) graphLabel = [];
+
+                // add each sensor values in an array
+                for (value of values) {
+                  data.push(value.value);
+                  if (value.timestamp) graphLabel.push(value.timestamp);
+                }
+
+                //
+                if (data.length > 0)
+                  sensorValues.push({
+                    label:
+                      sensor.id + (sensor.unit ? "(" + sensor.unit + ")" : ""),
+                    data: data,
+                    borderColor: dynamicColors()
+                  });
               })
-          }).finally((values) => {
-            loadGraph();
-          })
-        });
-        loadValues();
-      })
-    }
-
-    // select sensor
-    function onSensorSelect() {
-      var sensorsList = document.getElementById("selectSensor");
-      var selectedSensor = sensorsList.options[sensorsList.selectedIndex].value;
-      sensor_id = selectedSensor;
-      // reset measurements list
-      document.getElementById('selectMeasurement').innerText = null
-      loadMeasurements();
-    }
-
-    // select measurement
-    function onMeasurementSelect() {
-      var measurementsList = document.getElementById("selectMeasurement");
-      var selectedMeasurement = measurementsList.options[measurementsList.selectedIndex].value;
-      measurement_id = selectedMeasurement;
-      loadValues();
-    }
-
-    // random color generator
-    var dynamicColors = function () {
-      var r = Math.floor(Math.random() * 255);
-      var g = Math.floor(Math.random() * 255);
-      var b = Math.floor(Math.random() * 255);
-      return "rgb(" + r + "," + g + "," + b + ")";
-    };
-
-    // load sensor and measurement values
-    function loadValues() {
-
-      // sensor context
-      api.getSensor(sensor_id).then((sensor) => {
-        document.getElementById("sensor_name_context").innerHTML = "Name : " + sensor.name;
-        document.getElementById("sensor_owner").innerHTML = "Owner : " + sensor.owner;
-        document.getElementById("sensor_domain").innerHTML = "Domain : " + sensor.domain;
-        document.getElementById("sensor_gateway").innerHTML = "Gateway : " + sensor.gateway_id;
-      })
-
-      // sensor value
-      api.getMeasurement(sensor_id, measurement_id).then((sensor) => {
-        document.getElementById("sensor_value_id").innerHTML = sensor.id;
-        document.getElementById("sensor_name_value").innerHTML = "Name : " + sensor.name;
-        document.getElementById("sensor_last_value").innerHTML = "Last Value : " + sensor.last_value.value;
-        document.getElementById("sensor_quantity_kind").innerHTML = "Quantity Kind : " + sensor.quantity_kind;
-        document.getElementById("sensor_sensing_device").innerHTML = "Sensing Device : " + sensor.sensing_device;
-        document.getElementById("sensor_unit").innerHTML = "Unit : " + sensor.unit;
-      });
-    }
-
-    // load graph with sensor values
-    function loadGraph() {
-      // if chart already exists update dataset
-      if (myChart) {
-        myChart.data.labels = graphLabel;
-        myChart.data.datasets = measurementValues;
-        myChart.update();
-      } else {
-        var ctx = document.getElementById("myChart").getContext('2d');
-        myChart = new Chart(ctx, {
-          type: 'line',
-          data: {
-            labels: graphLabel,
-            datasets: measurementValues
-          },
-          options: {
-            responsive: false,
-          }
+              .finally(values => {
+                loadGraph();
+              });
+          });
+          loadValues();
         });
       }
-    }
 
-    // map
-    var mymap = L.map('mapid').setView([-1.97, 30.1], 8);
-    L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
-      attribution: 'Map data © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
-      maxZoom: 8,
-      id: 'mapbox.streets',
-      accessToken: 'pk.eyJ1IjoiY2R1cG9udDIiLCJhIjoiY2pnZTVkZ2xsMGxyZTJ4cjA5dDZ4cjNneSJ9.NJT7CULfcY0mjeavffR_vg'
-    }).addTo(mymap);
+      // select device
+      function onDeviceSelect() {
+        var devicesList = document.getElementById("selectDevice");
+        var selectedDevice =
+          devicesList.options[devicesList.selectedIndex].value;
+        device_id = selectedDevice;
+        // reset sensors list
+        document.getElementById("selectSensor").innerText = null;
+        loadSensors();
+      }
 
-    var markers = []
-    api.getSensors({
-      limit: 1000
-    }).then((sensors) => {
-      for (sensor of sensors) {
-        if (sensor.location) {
-          L.marker([sensor.location.latitude, sensor.location.longitude]).addTo(mymap);
+      // select sensor
+      function onSensorSelect() {
+        var sensorsList = document.getElementById("selectSensor");
+        var selectedSensor =
+          sensorsList.options[sensorsList.selectedIndex].value;
+        sensor_id = selectedSensor;
+        loadValues();
+      }
+
+      // random color generator
+      var dynamicColors = function() {
+        var r = Math.floor(Math.random() * 255);
+        var g = Math.floor(Math.random() * 255);
+        var b = Math.floor(Math.random() * 255);
+        return "rgb(" + r + "," + g + "," + b + ")";
+      };
+
+      // load device and sensor values
+      function loadValues() {
+        // device context
+        devicesApi.getDevice(device_id).then(device => {
+          document.getElementById("device_name_context").innerHTML =
+            "Name : " + device.name;
+          document.getElementById("device_owner").innerHTML =
+            "Owner : " + device.owner;
+          document.getElementById("device_domain").innerHTML =
+            "Domain : " + device.domain;
+          document.getElementById("device_gateway").innerHTML =
+            "Gateway : " + device.gateway_id;
+        });
+
+        // device value
+        sensorsApi.getSensor(device_id, sensor_id).then(device => {
+          document.getElementById("device_value_id").innerHTML = device.id;
+          document.getElementById("device_name_value").innerHTML =
+            "Name : " + device.name;
+          document.getElementById("device_last_value").innerHTML =
+            "Last Value : " + device.value.value;
+          document.getElementById("device_quantity_kind").innerHTML =
+            "Quantity Kind : " + device.quantity_kind;
+          document.getElementById("device_sensing_device").innerHTML =
+            "Sensing Device : " + device.sensing_device;
+          document.getElementById("device_unit").innerHTML =
+            "Unit : " + device.unit;
+        });
+      }
+
+      // load graph with device values
+      function loadGraph() {
+        // if chart already exists update dataset
+        if (myChart) {
+          myChart.data.labels = graphLabel;
+          myChart.data.datasets = sensorValues;
+          myChart.update();
+        } else {
+          var ctx = document.getElementById("myChart").getContext("2d");
+          myChart = new Chart(ctx, {
+            type: "line",
+            data: {
+              labels: graphLabel,
+              datasets: sensorValues
+            },
+            options: {
+              responsive: false
+            }
+          });
         }
       }
-    })
+
+      // map
+      var mymap = L.map("mapid").setView([-1.97, 30.1], 8);
+      L.tileLayer(
+        "https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}",
+        {
+          attribution:
+            'Map data © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
+          maxZoom: 8,
+          id: "mapbox.streets",
+          accessToken:
+            "pk.eyJ1IjoiY2R1cG9udDIiLCJhIjoiY2pnZTVkZ2xsMGxyZTJ4cjA5dDZ4cjNneSJ9.NJT7CULfcY0mjeavffR_vg"
+        }
+      ).addTo(mymap);
+
+      var markers = [];
+      devicesApi
+        .getDevices({
+          limit: 1000
+        })
+        .then(devices => {
+          for (device of devices) {
+            if (device.location) {
+              L.marker([
+                device.location.latitude,
+                device.location.longitude
+              ]).addTo(mymap);
+            }
+          }
+        });
     </script>
   </body>
 </html>

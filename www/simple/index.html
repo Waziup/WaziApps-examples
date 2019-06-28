@@ -1,17 +1,22 @@
 <html>
-<body>
-  <script src="https://cdn.jsdelivr.net/npm/waziup-js@1.1.6/lib/Waziup.js"></script>
-  <script>
-    Waziup.ApiClient.instance.basePath = 'https://api.waziup.io/api/v1'
-    var api = new Waziup.SensorsApi()
-    api.getMeasurement("UPPA-TESTS_Sensor6", "TC").then((meas) =>{
-      document.getElementById("sensor_value").innerHTML = "The temperature is: " + meas.last_value.value + "C";
-    })
-  </script>
-  <h1> My Application</h1>
-  <div id="sensor_value">
-    Loading...
-  </div>
-</body>
+  <body>
+    <script src="https://cdn.jsdelivr.net/npm/waziup-js@2.0.0-alpha.10/lib/Waziup.js"></script>
+    <script>
+      Waziup.ApiClient.instance.basePath = "https://api.waziup.io/api/v2";
+      var api = new Waziup.SensorsApi();
+      api
+        .getSensorsData({
+          device_id: "UGB-PILOTS_Sensor200",
+          sensor_id: "TP"
+        })
+        .then(sens => {
+          document.getElementById("device_value").innerHTML =
+            "The temperature is: " + sens[sens.length - 1].value + "C";
+        });
+    </script>
+    <h1>My Application</h1>
+    <div id="device_value">
+      Loading...
+    </div>
+  </body>
 </html>
-
