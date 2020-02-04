@@ -12,4 +12,7 @@ Usage
 2. Activate Github pages: Settings -> GitHub Pages -> select "Master source" and save.
 
 Your WaziApp is now published! You can see your app at the link given.
-You can then modify your WaziApp directly in github, it will be publish after a few seconds.
+You can then modify your WaziApp directly in github, it will be publish after a few seconds
+
+
+
