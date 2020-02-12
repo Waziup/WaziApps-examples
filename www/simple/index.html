@@ -1,22 +1,45 @@
 <html>
-  <body>
+
+<body>
     <script src="https://cdn.jsdelivr.net/npm/waziup-js@2.0.0-alpha.10/lib/Waziup.js"></script>
     <script>
-      Waziup.ApiClient.instance.basePath = "https://api.waziup.io/api/v2";
-      var api = new Waziup.SensorsApi();
-      api
-        .getSensorsData({
-          device_id: "UGB-PILOTS_Sensor200",
-          sensor_id: "TP"
-        })
-        .then(sens => {
-          document.getElementById("device_value").innerHTML =
-            "The temperature is: " + sens[sens.length - 1].value + "C";
-        });
+        function myRequest() {
+
+            fetch("https://api.waziup.io/api/v2/devices/MyDevice")
+                .then(response => {
+                    console.log(response);
+                })
+                .catch(error => console.log("Si è verificato un errore!"))
+
+            // Waziup.ApiClient.instance.basePath = "https://api.waziup.io/api/v2";
+            // var SensorsApi = new Waziup.SensorsApi();
+            // var DevicesApi = new WaziupApi.DevicesApi();
+            // var div = document.getElementById("deviceId");
+            // var deviceID = "MyDevice";
+            // var sensID = "TC1";
+            // var value = new Waziup.SensorValue("25.6", "2018-03-15T15:27:17+01:00");
+            // SensorsApi
+            //     .createSensorValue(deviceID, sensID, value);
+
+            // deviceId.innerHTML = "Loading...";
+
+            // DevicesApi 
+            //     .getDevice({
+            //         device_id: deviceID
+            //     })
+            //     .then(sens => {
+            //         console.log(sens);
+            //         div.innerHTML = "The temperature is: " + sens[sens.length - 1].value + "C";
+            //         console.log("The temperature is: " + sens[sens.length - 1].value + "C");
+            //     });
+        }
+
     </script>
     <h1>My Application</h1>
-    <div id="device_value">
-      Loading...
+    <div id="deviceId">
+        Loading...
     </div>
-  </body>
+    <button id="btn" onclick="myRequest()">Richiedi un nuovo dato</button>
+</body>
+
 </html>
