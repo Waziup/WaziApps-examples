@@ -77,13 +77,6 @@
               </li>
               <li class="list-group-item" id="device_name_value">Name</li>
               <li class="list-group-item" id="device_last_value">Last Value</li>
-              <li class="list-group-item" id="device_quantity_kind">
-                Quantity Kind
-              </li>
-              <li class="list-group-item" id="device_sensing_device">
-                Sensing Device
-              </li>
-              <li class="list-group-item" id="device_unit">Unit</li>
             </ul>
           </div>
         </div>
@@ -260,12 +253,6 @@
             "Name : " + device.name;
           document.getElementById("device_last_value").innerHTML =
             "Last Value : " + device.value.value;
-          document.getElementById("device_quantity_kind").innerHTML =
-            "Quantity Kind : " + device.quantity_kind;
-          document.getElementById("device_sensing_device").innerHTML =
-            "Sensing Device : " + device.sensing_device;
-          document.getElementById("device_unit").innerHTML =
-            "Unit : " + device.unit;
         });
       }
 
