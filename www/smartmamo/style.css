@@ -7,6 +7,10 @@ body {
     margin: 0!important;
 }
 
+label{
+    color: #ffffff;
+}
+
 p {
     font-family: 'Poppins', sans-serif;
     font-size: 1.1em;
@@ -51,7 +55,7 @@ a, a:hover, a:focus {
 
 /* Active/current link */
 .sidebar li.active {
-  background-color: #00bcd4;
+  background-color: #16E670;
   color: white;
 }
 
@@ -109,5 +113,5 @@ ul ul a {
 }
 
 .list-group-item.active {
-  background-color: #00bcd4;
+  background-color: #16E670;
 }
