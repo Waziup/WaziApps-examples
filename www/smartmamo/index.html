@@ -26,12 +26,11 @@
     <!-- Sidebar -->
     <ul class="sidebar" id="mtabs">
       <img src="waziupLogo.png" class="logo" alt="Waziup" />
-      <h4 class="text-center">App Title</h4>
+      <h4 class="text-center">Smart Real Estate Monitor</h4>
       <li class="active">
-        <a href="#context" rel="context">Device Context</a>
+        <a href="#context" rel="context">Device</a>
       </li>
-      <li><a href="#value" rel="value">Device Value</a></li>
-      <li><a href="#map" rel="map">Map</a></li>
+      <li><a href="#value" rel="value">Sensors</a></li>
       <li><a href="#graph" rel="graph">Graph</a></li>
     </ul>
     <!-- Page Content -->
@@ -77,13 +76,6 @@
               </li>
               <li class="list-group-item" id="device_name_value">Name</li>
               <li class="list-group-item" id="device_last_value">Last Value</li>
-              <li class="list-group-item" id="device_quantity_kind">
-                Quantity Kind
-              </li>
-              <li class="list-group-item" id="device_sensing_device">
-                Sensing Device
-              </li>
-              <li class="list-group-item" id="device_unit">Unit</li>
             </ul>
           </div>
         </div>
@@ -134,7 +126,7 @@
       var devicesApi = new Waziup.DevicesApi();
       var sensorsApi = new Waziup.SensorsApi();
       // default device values
-      var device_id = "UGB-PILOTS_Sensor200";
+      var device_id = "60dce1c278452400067ca0ee";
       var sensor_id = "TP";
       var sensorValues = [];
       var graphLabel = [];
@@ -260,12 +252,6 @@
             "Name : " + device.name;
           document.getElementById("device_last_value").innerHTML =
             "Last Value : " + device.value.value;
-          document.getElementById("device_quantity_kind").innerHTML =
-            "Quantity Kind : " + device.quantity_kind;
-          document.getElementById("device_sensing_device").innerHTML =
-            "Sensing Device : " + device.sensing_device;
-          document.getElementById("device_unit").innerHTML =
-            "Unit : " + device.unit;
         });
       }
 
