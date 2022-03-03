@@ -17,7 +17,7 @@ Run
 
 Simply run:
 ```
-python3 text.py
+python3 test.py
 ```
 
 On the dashboard you can see the new value published:
