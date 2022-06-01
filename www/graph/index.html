@@ -1,7 +1,6 @@
 <html>
-  <body>
+  <head>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
-    <canvas id="myChart" width="800" height="600">Loading...</canvas>
     <script>
       fetch("https://api.waziup.io/api/v2/devices/UGB-PILOTS_Sensor200/sensors/TP/values")
         .then(res => res.json())
@@ -17,5 +16,8 @@
                    {type: "line", data: { labels: labels, datasets: [{label: "Device values", data: data }]}});
         });
     </script>
+  </head>
+  <body>
+    <canvas id="myChart" width="800" height="600">Loading...</canvas>
   </body>
 </html>
