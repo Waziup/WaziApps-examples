@@ -1,40 +1,20 @@
 <html>
   <body>
-    <script src="https://cdn.jsdelivr.net/npm/waziup-js@2.0.0-alpha.10/lib/Waziup.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
     <canvas id="myChart" width="800" height="600">Loading...</canvas>
     <script>
-      Waziup.ApiClient.instance.basePath = "https://api.waziup.io/api/v2";
-      var api = new Waziup.SensorsApi();
-      var data = [];
-      var labels = [];
-      api
-        .getSensorsData({
-          device_id: "UGB-PILOTS_Sensor200",
-          sensor_id: "TP"
-        })
+      fetch("https://api.waziup.io/api/v2/devices/UGB-PILOTS_Sensor200/sensors/TP/values")
+        .then(res => res.json())
         .then(values => {
           console.log("data" + JSON.stringify(values));
+          var data = [];
+          var labels = [];
           for (value of values) {
             data.push(value.value);
             labels.push(value.timestamp);
           }
-          var ctx = document.getElementById("myChart").getContext("2d");
-          var myChart = new Chart(ctx, {
-            type: "line",
-            data: {
-              labels: labels,
-              datasets: [
-                {
-                  label: "Device values",
-                  data: data
-                }
-              ]
-            },
-            options: {
-              responsive: false
-            }
-          });
+          new Chart(document.getElementById("myChart").getContext("2d"),
+                   {type: "line", data: { labels: labels, datasets: [{label: "Device values", data: data }]}});
         });
     </script>
   </body>
