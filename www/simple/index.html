@@ -6,8 +6,8 @@
       var api = new Waziup.SensorsApi();
       api
         .getSensorsData({
-          device_id: "UGB-PILOTS_Sensor200",
-          sensor_id: "TP"
+          device_id: "MyDevice",
+          sensor_id: "TC1"
         })
         .then(sens => {
           document.getElementById("device_value").innerHTML =
